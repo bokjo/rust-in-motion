@@ -58,5 +58,18 @@ fn main() {
     println!("3. Slices");
     let a1 = [100, 200, 300];
     let s1 = &a1[0..2];
-    println!("slice {:#?}", s1)
+    println!("slice {:#?}", s1);
+
+    println!("Functions...");
+    next_birthday("Torko", 12);
+    println!("Sum: {}", add(12, 1));
+}
+
+fn next_birthday(name: &str, current_age: u8) {
+    let next_age = current_age + 1;
+    println!("Hello {}, bla bla {}!", name, next_age);
+}
+
+fn add(num1: i32, num2: i32) -> i32 {
+    return num1 + num2;
 }
