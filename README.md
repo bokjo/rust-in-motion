@@ -1,2 +1,3 @@
-# rust-in-motion
+# Che Rust in motion
+
 Rust in motion repo
