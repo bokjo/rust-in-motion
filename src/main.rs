@@ -65,6 +65,7 @@ fn main() {
     println!("Functions...");
     next_birthday("Torko", 12);
     println!("Sum: {}", add(12, 1));
+
     println!("Control flow in Rust...");
     println!("1. IF-ELSE");
     discount(3);
@@ -111,6 +112,14 @@ fn main() {
         (false, false) => println!("This account will be deactivated!"),
         _ => {}
     }
+
+    println!("Enums!");
+    let initial_position = Position::Center;
+    next_position(initial_position);
+
+    tell_time(Clock::Analog(9, 15, 25));
+    tell_time(Clock::Digital(9, 15));
+    tell_time(Clock::Sundial(9));
 }
 
 fn next_birthday(name: &str, current_age: u8) {
@@ -178,5 +187,34 @@ fn secret_word_with_while() {
 fn my_for_loop_example() {
     for i in 0..10 {
         println!("Serving #nr {}", i)
+    }
+}
+
+enum Position {
+    Center,
+    Left,
+    Right,
+    Top,
+    Bottom,
+}
+
+fn next_position(position: Position) {
+    println!("Next position will be: ");
+}
+
+enum Clock {
+    Sundial(u8),
+    Digital(u8, u8),
+    Analog(u8, u8, u8),
+}
+
+fn tell_time(clock: Clock) {
+    match clock {
+        Clock::Sundial(hours) => println!("It is about {} o'clock", hours),
+        Clock::Analog(hours, minutes, seconds) => println!(
+            "It is {} minutes and {} seconds past {} o'clock",
+            minutes, seconds, hours
+        ),
+        Clock::Digital(hours, minutes) => println!("It is {}:{} o'clock", hours, minutes),
     }
 }
