@@ -144,6 +144,18 @@ fn main() {
     struct MyStruct; // unit struct, doesn't have fields!
 
     let my_struct = MyStruct;
+
+    println!("Methods");
+
+    // shoot_puck(player, 1);
+    player.shoot_puck(1);
+
+    // Associated functions
+    println!("Associated functions");
+
+    let player2 = Player::new(String::from("Che2"), 88, Position::Bottom);
+    player2.shoot_puck(4);
+    player2.shoot_puck(33);
 }
 
 fn next_birthday(name: &str, current_age: u8) {
@@ -260,4 +272,29 @@ struct Meters(u8);
 
 fn add_distances(d1: Meters, d2: Meters) -> Meters {
     Meters(d1.0 + d2.0)
+}
+
+impl Player {
+    // &self, borrow self!!!
+    fn shoot_puck(&self, seconds_remaining: u16) {
+        println!("Player {}, shot after {}", self.name, seconds_remaining);
+
+        if seconds_remaining < 3 {
+            match self.position {
+                Position::Center => println!("Goal!"),
+                _ => println!("Miss!"),
+            }
+        } else {
+            println!("Goal!");
+        }
+    }
+
+    fn new(name: String, number: u8, position: Position) -> Player {
+        Player {
+            name,
+            number,
+            position,
+            goals: 0,
+        }
+    }
 }
