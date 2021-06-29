@@ -116,10 +116,34 @@ fn main() {
     println!("Enums!");
     let initial_position = Position::Center;
     next_position(initial_position);
-
     tell_time(Clock::Analog(9, 15, 25));
     tell_time(Clock::Digital(9, 15));
     tell_time(Clock::Sundial(9));
+    println!("Struct...");
+    let player = Player {
+        name: String::from("Che"),
+        number: 8,
+        position: Position::Center,
+        goals: 42,
+    };
+    println!(
+        "'{}' has scored {} goals this season",
+        player.name, player.goals
+    );
+
+    println!("Tuple struct...");
+    struct Triangle(u32, u32, u32);
+    let triangle = Triangle(3, 4, 5);
+
+    let distance1 = Meters(3);
+    let distance2: u8 = 7;
+
+    let distance3 = add_distances(distance1, Meters(distance2));
+    println!("Distance3 is {}", distance3.0);
+
+    struct MyStruct; // unit struct, doesn't have fields!
+
+    let my_struct = MyStruct;
 }
 
 fn next_birthday(name: &str, current_age: u8) {
@@ -208,6 +232,12 @@ enum Clock {
     Analog(u8, u8, u8),
 }
 
+enum NewClock {
+    Sundial { hours: u8 },
+    Digital { hours: u8, minutes: u8 },
+    Analog { hours: u8, minutes: u8, seconds: u8 },
+}
+
 fn tell_time(clock: Clock) {
     match clock {
         Clock::Sundial(hours) => println!("It is about {} o'clock", hours),
@@ -217,4 +247,17 @@ fn tell_time(clock: Clock) {
         ),
         Clock::Digital(hours, minutes) => println!("It is {}:{} o'clock", hours, minutes),
     }
+}
+
+struct Player {
+    name: String,
+    number: u8,
+    position: Position,
+    goals: u8,
+}
+
+struct Meters(u8);
+
+fn add_distances(d1: Meters, d2: Meters) -> Meters {
+    Meters(d1.0 + d2.0)
 }
